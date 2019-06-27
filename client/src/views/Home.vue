@@ -10,9 +10,19 @@
 import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-  name: 'home',
+  name: 'Home',
   components: {
     HelloWorld
+  },
+
+  computed: {
+    callApi() {
+      return this.$store.state.read.listData
+    }
+  },
+
+  created() {
+    this.$store.dispatch('getAdmin')
   }
 }
 </script>
