@@ -1,5 +1,6 @@
 const API = {
-  apiGetData: 'http://demo4528318.mockable.io/agodamock'
+  apiGetData: 'http://demoapi.local/api/product/read.php',
+  apiCreateData: 'http://demoapi.local/api/product/create.php'
 }
 
 export default API
