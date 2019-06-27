@@ -15,6 +15,7 @@ const user = {
     async getAdmin({ commit }) {
       try {
         const listData = await actionApi.get()
+        console.log(listData.data)
         commit('GET_ADMIN', listData.data)
       } catch(err) {
         return err

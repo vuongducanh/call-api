@@ -1,7 +1,18 @@
 <template>
   <div class="home">
+    <div class="el-col-4 mr-10">
+      <el-button
+        type="primary"
+        icon="el-icon-edit"
+        @click="showCreateForm"
+      >
+        addItem
+      </el-button>
+    </div>
+
     <el-table
       v-if="callApi.ResultList"
+      v-loading="loading"
       :data="callApi.ResultList"
       border
       fit
@@ -37,12 +48,26 @@
         </template>
       </el-table-column>
     </el-table>
+    <el-dialog
+      :visible.sync="dialogCreateForm"
+      :close-on-click-modal="false"
+      title="create new"
+      width="50%"
+    >
+      <div>aaaaa</div>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 export default {
   name: 'Home',
+  data() {
+    return {
+      loading: false,
+      dialogCreateForm: false
+    }
+  },
 
   computed: {
     callApi() {
@@ -51,7 +76,17 @@ export default {
   },
 
   created() {
-    this.$store.dispatch('getAdmin')
+    this.loading = true
+    this.$store.dispatch('getAdmin').then(() => {
+      this.loading = false
+    })
+  },
+
+  methods: {
+    showCreateForm() {
+      console.log('aaaa')
+      this.dialogCreateForm = true
+    }
   }
 }
 </script>
