@@ -1,19 +1,48 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <el-table
+      v-if="callApi.ResultList"
+      :data="callApi.ResultList"
+      border
+      fit
+      highlight-current-row
+    >
+      <el-table-column
+        label="CountryName"
+        min-width="100px"
+        align="left"
+      >
+        <template slot-scope="scope">
+          <span class="item-cursor content">{{ scope.row.CountryName }}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column
+        label="CountryName"
+        min-width="100px"
+        align="left"
+      >
+        <template slot-scope="scope">
+          <span class="item-cursor content">{{ scope.row.AreaName }}</span>
+        </template>
+      </el-table-column>
+
+      <el-table-column
+        label="CountryName"
+        min-width="100px"
+        align="left"
+      >
+        <template slot-scope="scope">
+          <span class="item-cursor content">{{ scope.row.CountryName }}</span>
+        </template>
+      </el-table-column>
+    </el-table>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
-  },
 
   computed: {
     callApi() {
