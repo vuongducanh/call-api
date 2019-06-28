@@ -54,28 +54,62 @@
       title="create new"
       width="50%"
     >
-    <el-form>
-      <el-form-item label="name" label-width="130px">
-          <el-input v-model="name" type="text"/>
-      </el-form-item>
+      <el-form>
+        <el-form-item
+          label="name"
+          label-width="130px"
+        >
+          <el-input
+            v-model="name"
+            type="text"
+          />
+        </el-form-item>
 
-      <el-form-item label="description" label-width="130px">
-          <el-input v-model="description" type="text"/>
-      </el-form-item>
+        <el-form-item
+          label="description"
+          label-width="130px"
+        >
+          <el-input
+            v-model="description"
+            type="text"
+          />
+        </el-form-item>
 
-       <el-form-item label="price" label-width="130px">
-          <el-input v-model="price" type="price"/>
-      </el-form-item>
+        <el-form-item
+          label="price"
+          label-width="130px"
+        >
+          <el-input
+            v-model="price"
+            type="price"
+          />
+        </el-form-item>
 
-       <el-form-item label="category_id" label-width="130px">
-          <el-input v-model="category_id" type="price"/>
-      </el-form-item>
-    </el-form>
+        <el-form-item
+          label="category_id"
+          label-width="130px"
+        >
+          <el-input
+            v-model="category_id"
+            type="price"
+          />
+        </el-form-item>
+      </el-form>
 
-    <div class="dialog-footer-center">
-      <el-button type="danger" @click="dialogCreateForm = false">cancle</el-button>
-      <el-button type="primary" @click="createItem">create</el-button>
-    </div>
+      <div class="dialog-footer-center">
+        <el-button
+          type="danger"
+          @click="dialogCreateForm = false"
+        >
+          cancle
+        </el-button>
+        <el-button
+          type="primary"
+          @click="createItem"
+        >
+          create
+        </el-button>
+      </div>
     </el-dialog>
   </div>
 </template>
