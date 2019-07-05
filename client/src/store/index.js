@@ -3,13 +3,11 @@ import Vuex from 'vuex'
 
 Vue.use(Vuex)
 
-import read from './modules/read'
-import create from './modules/create'
+import user from './modules/user'
 
 const store = new Vuex.Store({
   modules: {
-    read,
-    create
+    user
   }
 })
 

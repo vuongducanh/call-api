@@ -1,6 +1,6 @@
 const API = {
-  apiGetData: 'http://demoapi.local/api/product/read.php',
-  apiCreateData: 'http://demoapi.local/api/product/create.php'
+  apiGetData: 'http://localhost:3000/api/users',
+  apiCreateData: 'http://localhost:3000/api/users'
 }
 
 export default API
