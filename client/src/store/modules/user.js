@@ -11,7 +11,7 @@ const user = {
     },
 
     CREATE_USER: (state, listUser) => {
-      state.listData = listUser
+      state.listData.unshift(listUser)
     }
   },
 
@@ -28,9 +28,23 @@ const user = {
     async createNew({ commit }, data) {
       try {
         const listData = await actionApi.create(data)
-        console.log('listData = ', listData.data);
-        
-        // commit('CREATE_USER', listData.data)
+        commit('CREATE_USER', listData.data.data[0])
+      } catch(err) {
+        return err
+      }
+    },
+
+    async removeUser(_, id) {
+      try {
+        await actionApi.remove(id)
+      } catch(err) {
+        return err
+      }
+    },
+
+    async updateUser({commit}, params) {
+      try {
+        await actionApi.update(params.id, params)
       } catch(err) {
         return err
       }

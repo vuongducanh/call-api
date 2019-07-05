@@ -57,20 +57,43 @@
           <span class="item-cursor content">{{ scope.row.username }}</span>
         </template>
       </el-table-column>
+
+      <el-table-column
+        label="actions"
+        align="center"
+        width="250px"
+      >
+        <template slot-scope="scope">
+          <el-button
+            type="danger"
+            size="small"
+            @click="showFormDelete(scope.row.id)"
+          >
+            Delete
+          </el-button>
+          <el-button
+            type="danger"
+            size="small"
+            @click="showFormUpdate(scope.row)"
+          >
+            Update
+          </el-button>
+        </template>
+      </el-table-column>
     </el-table>
     <el-dialog
       :visible.sync="dialogCreateForm"
       :close-on-click-modal="false"
       title="create new"
-      width="50%"
+      :width="(dialogStatus === 'delete') ? '25%' : '50%'"
     >
-      <el-form>
+      <el-form v-if="dialogStatus === 'create' || dialogStatus === 'update'">
         <el-form-item
           label="birthday"
           label-width="130px"
         >
           <el-input
-            v-model="birthday"
+            v-model="params.birthday"
             type="text"
           />
         </el-form-item>
@@ -80,7 +103,7 @@
           label-width="130px"
         >
           <el-input
-            v-model="email"
+            v-model="params.email"
             type="text"
           />
         </el-form-item>
@@ -90,7 +113,7 @@
           label-width="130px"
         >
           <el-input
-            v-model="gender"
+            v-model="params.gender"
             type="price"
           />
         </el-form-item>
@@ -100,11 +123,14 @@
           label-width="130px"
         >
           <el-input
-            v-model="username"
+            v-model="params.username"
             type="price"
           />
         </el-form-item>
       </el-form>
+      <p v-else>
+        Do you want delete
+      </p>
 
       <div class="dialog-footer-center">
         <el-button
@@ -114,10 +140,27 @@
           cancle
         </el-button>
         <el-button
+          v-if="dialogStatus === 'create'"
           type="primary"
           @click="createItem"
         >
           create
+        </el-button>
+
+        <el-button
+          v-if="dialogStatus === 'delete'"
+          type="danger"
+          @click="deleteUser"
+        >
+          Confirm
+        </el-button>
+
+        <el-button
+          v-if="dialogStatus === 'update'"
+          type="danger"
+          @click="updateUser"
+        >
+          Confirm
         </el-button>
       </div>
     </el-dialog>
@@ -131,10 +174,14 @@ export default {
     return {
       loading: false,
       dialogCreateForm: false,
-      birthday: '',
-      email: '',
-      gender: '',
-      username: ''
+      dialogStatus: 'create',
+      idDelete: '',
+      params: {
+        birthday: '',
+        email: '',
+        gender: '',
+        username: '',
+      }
     }
   },
 
@@ -153,20 +200,55 @@ export default {
 
   methods: {
     showCreateForm() {
+      this.resetForm()
+      this.dialogStatus = 'create'
       this.dialogCreateForm = true
+    },
+
+    resetForm() {
+      this.params = {
+        birthday: '',
+        email: '',
+        gender: '',
+        username: '',
+      }
     },
 
     createItem() {
       const data = {
-        birthday: this.birthday,
-        email: this.email,
-        gender: this.gender,
-        username: this.username
+        birthday: this.params.birthday,
+        email: this.params.email,
+        gender: this.params.gender,
+        username: this.params.username
       }
 
       this.$store.dispatch('createNew', data).then(() => {
         this.dialogCreateForm = false
       })
+    },
+
+    showFormDelete(id) {
+      this.dialogCreateForm = true
+      this.dialogStatus = 'delete'
+      this.idDelete = id
+    },
+
+    deleteUser() {
+      this.$store.dispatch('removeUser', this.idDelete).then(() => {
+         this.$store.dispatch('getAdmin')
+         this.dialogCreateForm = false
+      })
+    },
+
+    showFormUpdate(params) {
+      this.dialogStatus = 'update'
+      this.params = Object.assign({}, params)
+      console.log(' this.params = ',  this.params)
+      this.dialogCreateForm = true
+    },
+
+    updateUser() {
+      this.$store.dispatch('updateUser', this.params)
     }
   },
 }

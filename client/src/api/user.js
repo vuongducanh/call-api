@@ -16,3 +16,18 @@ export function create(data) {
   })
 }
 
+export function remove(id) {
+  return request({
+    url:  `${API.apiCreateData}/${id}`,
+    method: 'delete'
+  })
+}
+
+export function update(id, data) {
+  return request({
+    url:  `${API.apiCreateData}/${id}`,
+    method: 'put',
+    data: data
+  })
+}
+
