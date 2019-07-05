@@ -248,7 +248,13 @@ export default {
     },
 
     updateUser() {
-      this.$store.dispatch('updateUser', this.params)
+      this.$store.dispatch('updateUser', this.params).then(() => {
+        this.$store.dispatch('getAdmin')
+        this.dialogCreateForm = false
+      })
+      .catch((err) => {
+        this.dialogCreateForm = false
+      })
     }
   },
 }
