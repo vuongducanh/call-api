@@ -31,3 +31,10 @@ export function update(id, data) {
   })
 }
 
+export function search(name) {
+  return request({
+    url:  `${API.apiSearchUser}${name}`,
+    method: 'get'
+  })
+}
+

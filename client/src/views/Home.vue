@@ -8,6 +8,13 @@
       >
         addItem
       </el-button>
+      <el-input v-model="keySearch" />
+      <el-button
+        type="primary"
+         @click="handleSearchUser"
+      >
+        Search User
+      </el-button>
     </div>
 
     <el-table
@@ -176,6 +183,7 @@ export default {
       dialogCreateForm: false,
       dialogStatus: 'create',
       idDelete: '',
+      keySearch: '',
       params: {
         birthday: '',
         email: '',
@@ -255,6 +263,10 @@ export default {
       .catch((err) => {
         this.dialogCreateForm = false
       })
+    },
+
+    handleSearchUser() {
+      this.$store.dispatch('searchUser', this.keySearch)
     }
   },
 }

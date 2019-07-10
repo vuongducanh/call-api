@@ -12,6 +12,10 @@ const user = {
 
     CREATE_USER: (state, listUser) => {
       state.listData.unshift(listUser)
+    },
+
+    SEARCH_USER: (state, listUserFilter) => {
+      state.listData = listUserFilter
     }
   },
 
@@ -42,9 +46,18 @@ const user = {
       }
     },
 
-    async updateUser({commit}, params) {
+    async updateUser(_, params) {
       try {
         await actionApi.update(params.id, params)
+      } catch(err) {
+        return err
+      }
+    },
+
+    async searchUser({commit}, keySearch) {
+      try {
+        const listUserFilter = await actionApi.search(keySearch)
+        commit("SEARCH_USER", listUserFilter.data.data)
       } catch(err) {
         return err
       }
