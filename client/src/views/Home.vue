@@ -121,7 +121,7 @@
         >
           <el-input
             v-model="params.gender"
-            type="price"
+            type="text"
           />
         </el-form-item>
 
@@ -131,7 +131,17 @@
         >
           <el-input
             v-model="params.username"
-            type="price"
+            type="text"
+          />
+        </el-form-item>
+
+        <el-form-item
+          label="password"
+          label-width="130px"
+        >
+          <el-input
+            v-model="password"
+            type="password"
           />
         </el-form-item>
       </el-form>
@@ -189,7 +199,8 @@ export default {
         email: '',
         gender: '',
         username: '',
-      }
+      },
+      password: ''
     }
   },
 
@@ -219,7 +230,8 @@ export default {
         email: '',
         gender: '',
         username: '',
-      }
+      },
+      this.password = ''
     },
 
     createItem() {
@@ -227,7 +239,8 @@ export default {
         birthday: this.params.birthday,
         email: this.params.email,
         gender: this.params.gender,
-        username: this.params.username
+        username: this.params.username,
+        password: this.password
       }
 
       this.$store.dispatch('createNew', data).then(() => {
