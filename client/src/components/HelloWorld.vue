@@ -6,7 +6,7 @@
 
     edit commit 1
   </div>
-  <p>dev test</p>
+  <p>dev test 2</p>
 </template>
 
 <script>
