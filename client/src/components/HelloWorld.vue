@@ -1,6 +1,10 @@
 <template>
   <div class="hello">
     call api
+
+    test commit 1
+
+    edit commit 1
   </div>
 </template>
 
